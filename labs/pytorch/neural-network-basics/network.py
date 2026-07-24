@@ -39,5 +39,4 @@ if __name__ == "__main__":
     print("/nOutput Shape:", output.shape)
 
     model_sequence = SequentialNetwork(IN_FEATURES, HIDDEN_FEATURES, OUT_FEATURES)
-    
     print("Sequential Model architecture: \n", model_sequence)
