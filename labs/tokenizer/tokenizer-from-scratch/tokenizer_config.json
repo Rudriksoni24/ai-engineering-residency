@@ -1,0 +1,50 @@
+{
+    "token_to_id": {
+        "[PAD]": 0,
+        "[UNK]": 1,
+        "a": 2,
+        "fruit": 3,
+        "is": 4,
+        "apple": 5,
+        "bmw": 6,
+        "builds": 7,
+        "cars": 8,
+        "electric": 9,
+        "evs": 10,
+        "makes": 11,
+        "orange": 12,
+        "tesla": 13
+    },
+    "id_to_token": {
+        "0": "[PAD]",
+        "1": "[UNK]",
+        "2": "a",
+        "3": "fruit",
+        "4": "is",
+        "5": "apple",
+        "6": "bmw",
+        "7": "builds",
+        "8": "cars",
+        "9": "electric",
+        "10": "evs",
+        "11": "makes",
+        "12": "orange",
+        "13": "tesla"
+    },
+    "frequencies": {
+        "[PAD]": 0,
+        "[UNK]": 0,
+        "a": 2,
+        "fruit": 2,
+        "is": 2,
+        "apple": 1,
+        "bmw": 1,
+        "builds": 1,
+        "cars": 1,
+        "electric": 1,
+        "evs": 1,
+        "makes": 1,
+        "orange": 1,
+        "tesla": 1
+    }
+}
