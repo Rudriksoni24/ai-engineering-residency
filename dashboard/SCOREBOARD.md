@@ -19,7 +19,7 @@
 | Day 6  | Embeddings                      | 🟢     | Embedding Engine        |
 | Day 7  | Positional Encoding             | 🟢     | Positional Encoding Lab |
 | Day 8  | Self-Attention and Q/K/V        | 🟢      | Attention Engine        |
-| Day 9  | Multi-Head Attention            | ⚪      | Multi-Head Attention    |
+| Day 9  | Multi-Head Attention            | 🟢      | Multi-Head Attention    |
 | Day 10 | Transformer Block               | ⚪      | Transformer Block       |
 | Day 11 | Attention Is All You Need       | ⚪      | Paper Implementation    |
 | Day 12 | MiniGPT Architecture            | ⚪      | MiniGPT                 |
