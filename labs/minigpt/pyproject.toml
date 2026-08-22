@@ -1,0 +1,11 @@
+[project]
+name = "minigpt"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "numpy>=2.5.2",
+    "pytest>=9.1.1",
+    "torch>=2.13.0",
+]
