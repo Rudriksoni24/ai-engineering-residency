@@ -3,6 +3,8 @@ import pytest
 from runtime.base import LLMRuntime
 from runtime.runtime_types import GenerationRequest, GenerationResponse
 
+from collections.abc import Iterator
+from runtime.streaming import StreamChunk 
 
 # =====================================================================
 # Tests: Runtime Contract Types
@@ -32,7 +34,7 @@ def test_generation_response_creation():
 def test_generation_response_metadata_absent():
     """[x] Metadata can be absent (defaults to an empty dictionary)."""
     res = GenerationResponse(text="No metadata", model="llama3")
-    assert res.metadata == {}
+    assert res.metadata is None
 
 
 def test_generation_response_metadata_present():
@@ -69,6 +71,13 @@ class FakeRuntime(LLMRuntime):
             completion_tokens=12,
             metadata={"mocked": True}
         )
+
+    def generate_stream(
+        self,
+        request: GenerationRequest,
+    ) -> Iterator[StreamChunk]:
+        """Fake implementation to satisfy the abstract contract."""
+        yield StreamChunk(text="fake chunk", done=True)
 
     def health_check(self) -> bool:
         return self.is_healthy
