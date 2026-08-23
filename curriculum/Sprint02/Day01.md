@@ -47,9 +47,9 @@ Generated Tokens
 
 ## Reading
 
-- Ollama documentation
-- llama.cpp documentation
-- llama.cpp model and GGUF documentation
+- Ollama documentation - https://docs.ollama.com/?utm_source=chatgpt.com 
+- llama.cpp documentation - https://github.com/ggml-org/llama.cpp?utm_source=chatgpt.com 
+- llama.cpp model and GGUF documentation - https://github.com/ggml-org/llama.cpp/blob/master/docs/models.md?utm_source=chatgpt.com
 
 ## Definition of Done
 
