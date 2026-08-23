@@ -61,12 +61,8 @@ class TransformerBlock(nn.Module):
         
         # Handle native causal masking instruction string
         if isinstance(mask, str) and mask == "causal":
-            # 1. Fetch your Day 1 mask matrix
-            raw_mask = create_causal_mask(seq_len)
-            
-            # 2. FIX: Convert explicitly to a PyTorch long/bool tensor on the correct device
-            # This ensures that `mask == 0` evaluations downstream create a true PyTorch Tensor!
-            mask = torch.tensor(raw_mask, dtype=torch.long, device=x.device)
+            # Directly transfer the pre-existing tensor to the target device and data type
+            mask = create_causal_mask(seq_len).to(device=x.device, dtype=torch.long)
             
         # --- Sub-layer 1: Attention Branch ---
         attn_out, _ = self.mha(x, mask=mask)

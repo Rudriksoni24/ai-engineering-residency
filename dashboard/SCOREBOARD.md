@@ -23,7 +23,7 @@
 | Day 10 | Transformer Block               | 🟢      | Transformer Block       |
 | Day 11 | Attention Is All You Need       | 🟢      | Paper Implementation    |
 | Day 12 | MiniGPT Architecture            | 🟢      | MiniGPT                 |
-| Day 13 | Train Tiny Language Model       | ⚪      | Trained MiniGPT         |
+| Day 13 | Train Tiny Language Model       | 🟢      | Trained MiniGPT         |
 | Day 14 | Sprint Review and Integration   | ⚪      | Sprint 1 Integration    |
 
 ## Sprint Exit Criteria

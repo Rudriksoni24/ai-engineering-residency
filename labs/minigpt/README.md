@@ -39,3 +39,33 @@ Training and text generation are implemented separately.
 - No pretrained weights.
 - No KV caching.
 - No production inference optimization.
+
+# Training Pipeline
+
+Text
+→ Tokenizer
+→ Token IDs
+→ Next-Token Dataset
+→ MiniGPT
+→ Vocabulary Logits
+→ Cross Entropy Loss
+→ Backpropagation
+→ AdamW
+→ Updated Parameters
+
+## Training Objective
+
+The model predicts the next token at every position.
+
+Input:
+
+A B C D
+
+Target:
+
+B C D E
+
+## Sanity Check
+
+Before training on larger data, the model must demonstrate the ability
+to overfit a small dataset.
