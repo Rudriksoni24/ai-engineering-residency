@@ -1,5 +1,4 @@
 import pytest
-from typing import Any
 
 from runtime.base import LLMRuntime
 from runtime.runtime_types import GenerationRequest, GenerationResponse

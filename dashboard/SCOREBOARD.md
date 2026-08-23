@@ -68,7 +68,7 @@
 | Day | Topic | Status | Artifact |
 |---|---|---|---|
 | Day 1 | Local LLM Architecture and Runtime Landscape | 🟢 | Local LLM Architecture Notes |
-| Day 2 | Ollama Fundamentals and Local Models | ⚪ | Ollama Model Runner |
+| Day 2 | Ollama Fundamentals and Local Models | 🟢 | Ollama Model Runner |
 | Day 3 | Model Anatomy and Quantization | ⚪ | Model Comparison Report |
 | Day 4 | Local Inference Engineering | ⚪ | Streaming and Structured Output Lab |
 | Day 5 | llama.cpp and GGUF | ⚪ | Direct Local Inference Benchmark |

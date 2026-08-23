@@ -79,3 +79,26 @@ Next Token Selection
 Repeated Autoregressive Generation
     ↓
 Response
+## Ollama Runtime Implementation
+
+The first concrete runtime implementation is OllamaRuntime.
+
+Flow:
+
+Application
+    ↓
+GenerationRequest
+    ↓
+LLMRuntime
+    ↓
+OllamaRuntime
+    ↓
+POST /api/generate
+    ↓
+Ollama
+    ↓
+Local Model
+    ↓
+GenerationResponse
+
+The application does not construct Ollama HTTP requests directly.
