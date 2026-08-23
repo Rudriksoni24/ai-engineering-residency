@@ -15,7 +15,7 @@
 |---|---|---|
 | Sprint 0 | Engineering Environment | 🟢 |
 | Sprint 1 | Understand and Build a Mini Transformer | 🟢 |
-| Sprint 2 | Run and Engineer Local LLM Systems | ⚪ |
+| Sprint 2 | Run and Engineer Local LLM Systems | 🟡 |
 | Sprint 3 | Build Production-Style RAG | ⚪ |
 | Sprint 4 | Build GraphRAG | ⚪ |
 | Sprint 5 | Build Agent Fundamentals | ⚪ |
@@ -67,7 +67,7 @@
 
 | Day | Topic | Status | Artifact |
 |---|---|---|---|
-| Day 1 | Local LLM Architecture and Runtime Landscape | ⚪ | Local LLM Architecture Notes |
+| Day 1 | Local LLM Architecture and Runtime Landscape | 🟢 | Local LLM Architecture Notes |
 | Day 2 | Ollama Fundamentals and Local Models | ⚪ | Ollama Model Runner |
 | Day 3 | Model Anatomy and Quantization | ⚪ | Model Comparison Report |
 | Day 4 | Local Inference Engineering | ⚪ | Streaming and Structured Output Lab |
