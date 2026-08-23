@@ -62,3 +62,22 @@ Local LLM service.
 ### Day 7
 
 Integration and benchmarking.
+
+## Model Analysis
+
+The local-llm module includes tools for estimating approximate model
+weight memory.
+
+The current estimator considers:
+
+- Parameter count
+- Precision / quantization
+
+The estimator does not yet accurately calculate:
+
+- KV cache memory
+- Runtime-specific memory
+- Temporary inference buffers
+- Hardware-specific memory allocation
+
+These will be explored in later iterations.

@@ -1,0 +1,10 @@
+Test Name,Prompt Size (Tokens),Total Duration (s),Prompt Eval Duration (s),Prompt Eval Rate (tokens/s),Eval Count (Tokens),Eval Rate (tokens/s),Observed KV Cache / Latency Behavior
+Test 1: Small,44,0.94,0.12,352.03,35,43.38,Near-instant response. Prompt processing was negligible.
+Test 2: Medium,505,5.10,1.22,413.67,162,42.28,Noticeable 1.2-second prefill pause before generation started.
+Test 3: Larger,3556,19.74,7.75,458.63,461,38.57,Heavy 7.7-second prefill delay as the large KV cache was built. Generation rate slowed slightly.
+
+
+model,parameters_billion,quantization,bits_per_parameter,context_window,estimated_weight_memory_gib,notes
+small-q4,3,Q4,4,8192,1.40,Good baseline
+medium-q4,8,Q4,4,8192,3.73,Test locally
+large-q4,14,Q4,4,8192,6.52,Potential memory pressure
