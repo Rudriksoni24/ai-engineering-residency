@@ -71,7 +71,7 @@
 | Day 2 | Ollama Fundamentals and Local Models | 🟢 | Ollama Model Runner |
 | Day 3 | Model Anatomy and Quantization | 🟢 | Model Comparison Report |
 | Day 4 | Local Inference Engineering | 🟢 | Streaming and Structured Output Lab |
-| Day 5 | llama.cpp and GGUF | ⚪ | Direct Local Inference Benchmark |
+| Day 5 | llama.cpp and GGUF | 🟢 | Direct Local Inference Benchmark |
 | Day 6 | Local LLM Inference Service | ⚪ | FastAPI Local LLM Service |
 | Day 7 | Sprint Integration and Evaluation | ⚪ | Local LLM Platform |
 

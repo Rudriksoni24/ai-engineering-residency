@@ -102,3 +102,21 @@ Local Model
 GenerationResponse
 
 The application does not construct Ollama HTTP requests directly.
+
+## llama.cpp Runtime
+
+llama.cpp is evaluated as a lower-level local inference runtime.
+
+Flow:
+
+Application
+    ↓
+Runtime Adapter
+    ↓
+llama.cpp CLI or Server
+    ↓
+GGUF Model
+    ↓
+Local Hardware
+
+The initial implementation experiments with CLI and server modes before finalizing the production runtime adapter.
