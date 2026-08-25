@@ -81,3 +81,34 @@ The estimator does not yet accurately calculate:
 - Hardware-specific memory allocation
 
 These will be explored in later iterations.
+
+# Final Architecture
+
+                    ┌──────────────┐
+                    │   Client     │
+                    └──────┬───────┘
+                           │
+                           ▼
+                    ┌──────────────┐
+                    │   FastAPI    │
+                    └──────┬───────┘
+                           │
+                           ▼
+                    ┌──────────────┐
+                    │  LLMService  │
+                    └──────┬───────┘
+                           │
+                           ▼
+                    ┌──────────────┐
+                    │   Contract   │
+                    └──────┬───────┘
+                           │
+              ┌────────────┴───────────┐
+              ▼                        ▼
+        ┌───────────┐            ┌───────────┐
+        │  Ollama   │            │ llama.cpp │
+        └───────────┘            └───────────┘
+              │                        │
+              └────────────┬───────────┘
+                           ▼
+                     Local Models

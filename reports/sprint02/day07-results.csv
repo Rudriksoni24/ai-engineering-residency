@@ -1,0 +1,16 @@
+case,run,model,runtime,latency_seconds,keyword_score,valid_json
+transformer_concept,1,qwen2.5:3b,ollama,2.99,1.0,
+transformer_concept,2,qwen2.5:3b,ollama,2.13,0.0,
+transformer_concept,3,qwen2.5:3b,ollama,2.16,0.333,
+rag_concept,1,qwen2.5:3b,ollama,1.86,1.0,
+rag_concept,2,qwen2.5:3b,ollama,2.47,1.0,
+rag_concept,3,qwen2.5:3b,ollama,2.13,1.0,
+structured_output,1,qwen2.5:3b,ollama,1.52,,False
+structured_output,2,qwen2.5:3b,ollama,0.89,,False
+structured_output,3,qwen2.5:3b,ollama,0.81,,False
+banking_reasoning,1,qwen2.5:3b,ollama,9.94,0.4,
+banking_reasoning,2,qwen2.5:3b,ollama,9.67,0.6,
+banking_reasoning,3,qwen2.5:3b,ollama,8.46,0.4,
+concise_summary,1,qwen2.5:3b,ollama,3.53,0.667,
+concise_summary,2,qwen2.5:3b,ollama,,,
+concise_summary,3,qwen2.5:3b,ollama,4.00,0.667,

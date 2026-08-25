@@ -15,7 +15,7 @@
 |---|---|---|
 | Sprint 0 | Engineering Environment | 🟢 |
 | Sprint 1 | Understand and Build a Mini Transformer | 🟢 |
-| Sprint 2 | Run and Engineer Local LLM Systems | 🟡 |
+| Sprint 2 | Run and Engineer Local LLM Systems | 🟢 |
 | Sprint 3 | Build Production-Style RAG | ⚪ |
 | Sprint 4 | Build GraphRAG | ⚪ |
 | Sprint 5 | Build Agent Fundamentals | ⚪ |
@@ -73,7 +73,7 @@
 | Day 4 | Local Inference Engineering | 🟢 | Streaming and Structured Output Lab |
 | Day 5 | llama.cpp and GGUF | 🟢 | Direct Local Inference Benchmark |
 | Day 6 | Local LLM Inference Service | 🟢 | FastAPI Local LLM Service |
-| Day 7 | Sprint Integration and Evaluation | ⚪ | Local LLM Platform |
+| Day 7 | Sprint Integration and Evaluation | 🟢 | Local LLM Platform |
 
 ## Sprint Exit Criteria
 
