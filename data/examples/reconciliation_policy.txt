@@ -1,0 +1,15 @@
+Transaction reconciliation compares records between
+multiple financial systems.
+
+A transaction mismatch does not automatically indicate fraud.
+
+A reconciliation system should identify:
+
+- Missing transactions
+- Duplicate transactions
+- Amount mismatches
+- Currency mismatches
+- Timing differences
+
+Every automated decision should preserve evidence
+for audit and investigation.

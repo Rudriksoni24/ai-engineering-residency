@@ -16,7 +16,7 @@
 | Sprint 0 | Engineering Environment | 🟢 |
 | Sprint 1 | Understand and Build a Mini Transformer | 🟢 |
 | Sprint 2 | Run and Engineer Local LLM Systems | 🟢 |
-| Sprint 3 | Build Production-Style RAG | ⚪ |
+| Sprint 3 | Build Production-Style RAG | 🟡 |
 | Sprint 4 | Build GraphRAG | ⚪ |
 | Sprint 5 | Build Agent Fundamentals | ⚪ |
 | Sprint 6 | Build Stateful and Multi-Agent Workflows | ⚪ |
@@ -96,7 +96,7 @@
 
 | Day | Topic | Status | Artifact |
 |---|---|---|---|
-| Day 1 | Embeddings and Semantic Search | ⚪ | Semantic Search Engine |
+| Day 1 | Embeddings and Semantic Search | 🟢 | Semantic Search Engine |
 | Day 2 | Document Ingestion Pipeline | ⚪ | Document Ingestion Service |
 | Day 3 | Chunking Strategies and Metadata | ⚪ | Chunking Evaluation Lab |
 | Day 4 | Vector Databases and Hybrid Search | ⚪ | Local Vector Store |
