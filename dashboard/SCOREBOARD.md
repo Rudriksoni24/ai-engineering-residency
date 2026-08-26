@@ -97,7 +97,7 @@
 | Day | Topic | Status | Artifact |
 |---|---|---|---|
 | Day 1 | Embeddings and Semantic Search | 🟢 | Semantic Search Engine |
-| Day 2 | Document Ingestion Pipeline | ⚪ | Document Ingestion Service |
+| Day 2 | Document Ingestion Pipeline | 🟢 | Document Ingestion Service |
 | Day 3 | Chunking Strategies and Metadata | ⚪ | Chunking Evaluation Lab |
 | Day 4 | Vector Databases and Hybrid Search | ⚪ | Local Vector Store |
 | Day 5 | End-to-End RAG Pipeline | ⚪ | Local RAG Application |
