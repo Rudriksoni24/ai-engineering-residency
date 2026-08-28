@@ -62,6 +62,10 @@ def test_rag_pipeline():
         "be investigated."
     )
 
+    assert response.retrieved_documents == [
+    "All transaction mismatches must be investigated."
+    ]
+    
     assert response.sources == [
         "policy.txt"
     ]
@@ -91,5 +95,5 @@ def test_rag_pipeline_handles_empty_context():
     response = pipeline.answer(
         "Unknown question"
     )
-
+    assert response.retrieved_documents == []
     assert response.retrieved_count == 0

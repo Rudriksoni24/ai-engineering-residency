@@ -12,8 +12,7 @@ class RAGResponse:
     answer: str
     sources: list[str]
     retrieved_count: int
-
-
+    retrieved_documents: list[str]
 class RAGPipeline:
 
     def __init__(
@@ -45,6 +44,7 @@ class RAGPipeline:
                 ),
                 sources=[],
                 retrieved_count=0,
+                retrieved_documents=[],
             )
 
         prompt = self.prompt_builder.build(
@@ -63,8 +63,14 @@ class RAGPipeline:
             )
         )
 
+        retrieved_documents = [
+            result.content
+            for result in results
+        ]
+
         return RAGResponse(
             answer=answer,
             sources=sources,
             retrieved_count=len(results),
+            retrieved_documents=retrieved_documents,
         )

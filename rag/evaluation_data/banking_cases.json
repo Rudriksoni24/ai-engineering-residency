@@ -1,0 +1,14 @@
+[
+  {
+    "query": "How are transaction mismatches handled?",
+    "expected_answer": "Transaction mismatches must be investigated."
+  },
+  {
+    "query": "What should happen when a payment fails?",
+    "expected_answer": "Failed payments should be investigated and retried according to the payment process."
+  },
+  {
+    "query": "What should be done with suspicious transactions?",
+    "expected_answer": "Suspicious transactions must be reviewed according to compliance procedures."
+  }
+]
