@@ -1,0 +1,30 @@
+[project]
+name = "ai-engineering-residency"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.141.1",
+    "matplotlib>=3.11.1",
+    "numpy>=2.5.2",
+    "pydantic>=2.13.4",
+    "pytest>=9.1.1",
+    "requests>=2.34.2",
+    "ruff>=0.16.5",
+    "seaborn>=0.13.2",
+    "sentence-transformers>=6.0.0",
+    "torch>=2.13.0",
+    "typer>=0.27.1",
+    "uvicorn[standard]>=0.52.4",
+]
+
+[tool.setuptools]
+packages = ["local_llm"]
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[dependency-groups]
+dev = [
+    "httpx2>=2.12.0",
+]

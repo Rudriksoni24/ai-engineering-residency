@@ -223,3 +223,39 @@ Refer LEARNING_JOURNAL.md
 # Resources
 
 Refer RESOURCES.md
+
+# Project Structure
+ai-engineering-residency/
+│
+├── pyproject.toml
+├── uv.lock
+│
+├── transformer/
+│   ├── __init__.py
+│   ├── models/
+│   ├── training/
+│   └── tests/
+│
+├── local_llm/
+│   ├── __init__.py
+│   ├── clients/
+│   ├── models/
+│   └── tests/
+│
+├── rag/
+│   ├── __init__.py
+│   ├── loaders/
+│   ├── chunking/
+│   ├── embeddings/
+│   ├── retrieval/
+│   ├── generation/
+│   ├── pipeline/
+│   └── tests/
+│
+├── agents/
+├── ml/
+├── streaming/
+│
+├── curriculum/
+├── reports/
+└── shared/
