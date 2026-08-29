@@ -127,7 +127,7 @@
 |---|---|---|---|
 | Day 1 | Knowledge Graph Fundamentals | 🟢 | Graph Modeling Lab |
 | Day 2 | Entity and Relationship Extraction | 🟢 | Knowledge Extraction Pipeline |
-| Day 3 | Graph Storage and Querying | ⚪ | Local Knowledge Graph |
+| Day 3 | Graph Storage and Querying | 🟢 | Local Knowledge Graph |
 | Day 4 | Graph Retrieval | ⚪ | Graph Retrieval Engine |
 | Day 5 | GraphRAG Architecture | ⚪ | GraphRAG Pipeline |
 | Day 6 | Compare Vector RAG vs GraphRAG | ⚪ | Retrieval Comparison Report |
