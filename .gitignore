@@ -236,3 +236,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local databases
+*.db
+*.db-shm
+*.db-wal
