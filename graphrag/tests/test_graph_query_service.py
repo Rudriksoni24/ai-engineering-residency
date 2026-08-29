@@ -103,6 +103,38 @@ def test_get_entities_by_type(
         == "customer:ravi"
     )
 
+def test_finds_entities_by_name(
+    store,
+):
+    store.add_entity(
+            Entity(
+                entity_id="customer:ravi",
+                entity_type="customer",
+                name="Ravi",
+            )
+        )
+    
+    store.add_entity(
+            Entity(
+                entity_id="account:acc001",
+                entity_type="account",
+                name="ACC001",
+            )
+        )
+    entities = (
+        store
+        .find_entities_by_name(
+            "acc001"
+        )
+    )
+
+    assert len(entities) == 1
+
+    assert (
+        entities[0].entity_id
+        == "account:acc001"
+    )
+
 
 def test_adds_and_reads_relationship(
     store,

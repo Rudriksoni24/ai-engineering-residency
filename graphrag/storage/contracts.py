@@ -28,6 +28,12 @@ class GraphStore(Protocol):
         entity_type: str,
     ) -> list[Entity]:
         ...
+        
+    def find_entities_by_name(
+        self,
+        name: str,
+    ) -> list[Entity]:
+        ...
 
     def add_relationship(
         self,

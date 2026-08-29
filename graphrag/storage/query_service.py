@@ -15,6 +15,12 @@ class GraphQueryService:
     ) -> None:
         self.store = store
 
+    def all_entities(
+        self,
+    ) -> list[Entity]:
+
+        return self.store.get_entities()
+
     def find_entity(
         self,
         entity_id: str,
@@ -34,6 +40,16 @@ class GraphQueryService:
             .get_entities_by_type(
                 entity_type
             )
+        )
+
+    def find_entities_by_name(
+        self,
+        name: str,
+    ) -> list[Entity]:
+        
+        return (
+            self.store
+            .find_entities_by_name(name)
         )
 
     def neighbors(
