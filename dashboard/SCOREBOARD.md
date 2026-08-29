@@ -151,7 +151,7 @@
 
 | Day | Topic | Status | Artifact |
 |---|---|---|---|
-| Day 1 | Agent Architecture and ReAct | ⚪ | Agent Architecture Lab |
+| Day 1 | Agent Architecture and ReAct | 🟢 | Agent Architecture Lab |
 | Day 2 | Tool Calling | ⚪ | Tool Registry |
 | Day 3 | Planning and Execution | ⚪ | Planning Agent |
 | Day 4 | Memory Fundamentals | ⚪ | Agent Memory Layer |
