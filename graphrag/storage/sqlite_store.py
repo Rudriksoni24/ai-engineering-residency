@@ -213,6 +213,32 @@ class SQLiteGraphStore:
             for row in rows
         ]
 
+    def find_entities_by_name(
+        self,
+        name: str,
+    ) -> list[Entity]:
+
+        with self._connect() as connection:
+
+            rows = connection.execute(
+                """
+                SELECT
+                    entity_id,
+                    entity_type,
+                    name,
+                    properties
+                FROM entities
+                WHERE LOWER(name) = LOWER(?)
+                ORDER BY entity_id
+                """,
+                (name.strip(),),
+            ).fetchall()
+
+        return [
+            self._row_to_entity(row)
+            for row in rows
+        ]
+
     def add_relationship(
         self,
         relationship: Relationship,
