@@ -187,3 +187,8 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+#     export OLLAMA_MODEL="qwen2.5:3b" 
+# echo $OLLAMA_MODEL 
+# uv run python -m graphrag.scripts.run_graphrag

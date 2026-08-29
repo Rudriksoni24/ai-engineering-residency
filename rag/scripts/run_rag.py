@@ -18,8 +18,12 @@ from rag.retrieval.vector_store import (
     InMemoryVectorStore,
 )
 
+from local_llm.runtime.ollama_runtime import (
+    OllamaRuntime,
+)
 
-def main():
+
+def build_pipeline():
     path = Path(
         "data/examples/reconciliation_policy.txt"
     )
@@ -64,8 +68,6 @@ def main():
         vector_store=vector_store,
     )
 
-    from local_llm.runtime.ollama_runtime import OllamaRuntime
-
     llm_client = OllamaRuntime()
 
     generator = LocalGenerator(
@@ -77,6 +79,12 @@ def main():
         prompt_builder=PromptBuilder(),
         generator=generator,
     )
+
+    return pipeline
+
+
+def main():
+    pipeline = build_pipeline()
 
     query = (
         "What is the process for investigating inconsistent transactions?"
@@ -107,4 +115,4 @@ def main():
 if __name__ == "__main__":
     main()
 
-    # uv run --project rag python -m rag.scripts.run_rag
+# uv run --project rag python -m rag.scripts.run_rag

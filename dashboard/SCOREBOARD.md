@@ -130,7 +130,7 @@
 | Day 3 | Graph Storage and Querying | 🟢 | Local Knowledge Graph |
 | Day 4 | Graph Retrieval | 🟢 | Graph Retrieval Engine |
 | Day 5 | GraphRAG Architecture | 🟢 | GraphRAG Pipeline |
-| Day 6 | Compare Vector RAG vs GraphRAG | ⚪ | Retrieval Comparison Report |
+| Day 6 | Compare Vector RAG vs GraphRAG | 🟢 | Retrieval Comparison Report |
 | Day 7 | Sprint Integration | ⚪ | Banking Graph Intelligence System |
 
 ## Sprint Exit Criteria
