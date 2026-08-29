@@ -17,8 +17,8 @@
 | Sprint 1 | Understand and Build a Mini Transformer | 🟢 |
 | Sprint 2 | Run and Engineer Local LLM Systems | 🟢 |
 | Sprint 3 | Build Production-Style RAG | 🟢 |
-| Sprint 4 | Build GraphRAG | 🟡 |
-| Sprint 5 | Build Agent Fundamentals | ⚪ |
+| Sprint 4 | Build GraphRAG | 🟢 |
+| Sprint 5 | Build Agent Fundamentals | 🟡 |
 | Sprint 6 | Build Stateful and Multi-Agent Workflows | ⚪ |
 | Sprint 7 | Adapt Local Models with LoRA and Understand Alignment | ⚪ |
 | Sprint 8 | Build Traditional ML and MLflow Systems | ⚪ |
@@ -131,7 +131,7 @@
 | Day 4 | Graph Retrieval | 🟢 | Graph Retrieval Engine |
 | Day 5 | GraphRAG Architecture | 🟢 | GraphRAG Pipeline |
 | Day 6 | Compare Vector RAG vs GraphRAG | 🟢 | Retrieval Comparison Report |
-| Day 7 | Sprint Integration | ⚪ | Banking Graph Intelligence System |
+| Day 7 | Sprint Integration | 🟢 | Banking Graph Intelligence System |
 
 ## Sprint Exit Criteria
 
