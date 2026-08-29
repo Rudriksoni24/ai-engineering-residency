@@ -16,8 +16,8 @@
 | Sprint 0 | Engineering Environment | 🟢 |
 | Sprint 1 | Understand and Build a Mini Transformer | 🟢 |
 | Sprint 2 | Run and Engineer Local LLM Systems | 🟢 |
-| Sprint 3 | Build Production-Style RAG | 🟡 |
-| Sprint 4 | Build GraphRAG | ⚪ |
+| Sprint 3 | Build Production-Style RAG | 🟢 |
+| Sprint 4 | Build GraphRAG | 🟡 |
 | Sprint 5 | Build Agent Fundamentals | ⚪ |
 | Sprint 6 | Build Stateful and Multi-Agent Workflows | ⚪ |
 | Sprint 7 | Adapt Local Models with LoRA and Understand Alignment | ⚪ |
@@ -125,7 +125,7 @@
 
 | Day | Topic | Status | Artifact |
 |---|---|---|---|
-| Day 1 | Knowledge Graph Fundamentals | ⚪ | Graph Modeling Lab |
+| Day 1 | Knowledge Graph Fundamentals | 🟢 | Graph Modeling Lab |
 | Day 2 | Entity and Relationship Extraction | ⚪ | Knowledge Extraction Pipeline |
 | Day 3 | Graph Storage and Querying | ⚪ | Local Knowledge Graph |
 | Day 4 | Graph Retrieval | ⚪ | Graph Retrieval Engine |
