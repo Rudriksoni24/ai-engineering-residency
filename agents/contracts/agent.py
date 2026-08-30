@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from dataclasses import dataclass, field
-from typing import Any, Literal
+from typing import Any, Literal, Protocol
 
 
 @dataclass(frozen=True)
@@ -47,10 +49,20 @@ class AgentDecision:
                 raise ValueError(
                     "final decision cannot contain tool_call"
                 )
-
+@dataclass(frozen=True)
+class AgentStep:
+    iteration: int
+    tool_name: str
+    arguments: dict[str, Any]
+    observation: str
 
 @dataclass(frozen=True)
 class AgentResponse:
     answer: str
-    tool_used: str | None
-    observation: str | None 
+    tool_used: bool = False
+    observation: str | None = None
+    steps: tuple[AgentStep, ...] = field(default_factory=tuple)
+
+class AgentGenerator(Protocol):
+    def generate(self, prompt: str) -> str:
+        ...
