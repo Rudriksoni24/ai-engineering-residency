@@ -156,7 +156,7 @@
 | Day 3 | Planning and Execution | 🟢 | Planning Agent |
 | Day 4 | Memory Fundamentals | 🟢 | Agent Memory Layer |
 | Day 5 | Structured Outputs and Guardrails | 🟢 | Reliable Agent Contracts |
-| Day 6 | Agent Evaluation | ⚪ | Agent Test Harness |
+| Day 6 | Agent Evaluation | 🟢 | Agent Test Harness |
 | Day 7 | Sprint Integration | ⚪ | Research and Analysis Agent |
 
 ## Sprint Exit Criteria

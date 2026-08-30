@@ -85,6 +85,15 @@ You may either:
 
 Return exactly one JSON object.
 
+The "type" field may contain ONLY one of these values:
+
+- "tool"
+- "final"
+
+Never use values such as:
+- "tool_decision"
+- "final_answer"
+
 Tool decision format:
 
 {{
