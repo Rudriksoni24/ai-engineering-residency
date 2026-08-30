@@ -1,4 +1,8 @@
-from agents.tools.base import AgentTool
+import json
+
+from agents.tools.registry import (
+    AgentToolRegistry,
+)
 
 
 class AgentPromptBuilder:
@@ -6,7 +10,7 @@ class AgentPromptBuilder:
     def build(
         self,
         user_query: str,
-        tools: list[AgentTool],
+        registry: AgentToolRegistry,
     ) -> str:
 
         if not user_query.strip():
@@ -14,34 +18,60 @@ class AgentPromptBuilder:
                 "user_query cannot be empty"
             )
 
-        tool_lines = "\n".join(
-            (
-                f"- {tool.name}: "
-                f"{tool.description}"
-            )
-            for tool in tools
+        tool_definitions = [
+            {
+                "name": definition.name,
+                "description": (
+                    definition.description
+                ),
+                "parameters": [
+                    {
+                        "name": parameter.name,
+                        "type": (
+                            parameter
+                            .parameter_type
+                        ),
+                        "description": (
+                            parameter
+                            .description
+                        ),
+                        "required": (
+                            parameter.required
+                        ),
+                    }
+                    for parameter
+                    in definition.parameters
+                ],
+            }
+            for definition
+            in registry.definitions()
+        ]
+
+        tools_json = json.dumps(
+            tool_definitions,
+            indent=2,
         )
 
         return f"""You are a banking operations assistant.
 
-Decide whether you can answer the user's request directly or whether you need to use one of the available tools.
+Decide whether the user's request can be answered directly or requires one of the available tools.
 
 Available tools:
-{tool_lines}
+{tools_json}
 
 Return exactly one JSON object.
 
-If a tool is required:
+Tool request:
 
 {{
   "type": "tool",
-  "tool_name": "<tool name>",
+  "tool_name": "<registered tool name>",
   "arguments": {{
-    "<argument>": "<value>"
+    "<argument name>": "<value>"
   }}
 }}
 
-If no tool is required:
+Direct answer:
 
 {{
   "type": "final",
@@ -49,10 +79,12 @@ If no tool is required:
 }}
 
 Rules:
-1. Do not invent tool names.
-2. Use a tool when the request requires information that only the tool can provide.
-3. Do not wrap the JSON in markdown.
-4. Return no text before or after the JSON.
+1. Use only registered tools.
+2. Follow the tool argument definitions exactly.
+3. Do not invent arguments.
+4. Use a tool when external banking information is required.
+5. Do not wrap the result in markdown.
+6. Return no text before or after the JSON.
 
 User request:
 {user_query}

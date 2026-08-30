@@ -12,6 +12,12 @@ from agents.core.prompt_builder import (
 from agents.tools.banking import (
     GetAccountTool,
 )
+from agents.tools.executor import (
+    AgentToolExecutor,
+)
+from agents.tools.registry import (
+    AgentToolRegistry,
+)
 
 
 class FakeGenerator:
@@ -48,9 +54,18 @@ def build_agent(
         }
     )
 
+    registry = AgentToolRegistry(
+    tools=[tool]
+)
+
     return MinimalAgent(
         generator=generator,
-        tools=[tool],
+        registry=registry,
+        executor=(
+            AgentToolExecutor(
+                registry
+            )
+        ),
         prompt_builder=(
             AgentPromptBuilder()
         ),

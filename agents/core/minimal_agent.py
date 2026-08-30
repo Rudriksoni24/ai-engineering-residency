@@ -9,7 +9,12 @@ from agents.core.decision_parser import (
 from agents.core.prompt_builder import (
     AgentPromptBuilder,
 )
-from agents.tools.base import AgentTool
+from agents.tools.executor import (
+    AgentToolExecutor,
+)
+from agents.tools.registry import (
+    AgentToolRegistry,
+)
 
 
 class TextGenerator(Protocol):
@@ -26,19 +31,21 @@ class MinimalAgent:
     def __init__(
         self,
         generator: TextGenerator,
-        tools: list[AgentTool],
+        registry: AgentToolRegistry,
+        executor: AgentToolExecutor,
         prompt_builder: AgentPromptBuilder,
         decision_parser: AgentDecisionParser,
     ) -> None:
 
         self.generator = generator
-        self.prompt_builder = prompt_builder
-        self.decision_parser = decision_parser
-
-        self.tools = {
-            tool.name: tool
-            for tool in tools
-        }
+        self.registry = registry
+        self.executor = executor
+        self.prompt_builder = (
+            prompt_builder
+        )
+        self.decision_parser = (
+            decision_parser
+        )
 
     def run(
         self,
@@ -47,9 +54,7 @@ class MinimalAgent:
 
         prompt = self.prompt_builder.build(
             user_query=user_query,
-            tools=list(
-                self.tools.values()
-            ),
+            registry=self.registry,
         )
 
         raw_decision = (
@@ -84,22 +89,25 @@ class MinimalAgent:
                 "tool decision missing tool call"
             )
 
-        tool = self.tools.get(
-            tool_call.tool_name
+        result = self.executor.execute(
+            tool_name=(
+                tool_call.tool_name
+            ),
+            arguments=(
+                tool_call.arguments
+            ),
         )
 
-        if tool is None:
+        if not result.success:
             raise ValueError(
-                "unknown tool requested: "
-                f"{tool_call.tool_name}"
+                result.error
+                or "tool execution failed"
             )
 
-        observation = tool.execute(
-            tool_call.arguments
-        )
-
         return AgentResponse(
-            answer=observation,
-            tool_used=tool.name,
-            observation=observation,
+            answer=result.observation,
+            tool_used=result.tool_name,
+            observation=(
+                result.observation
+            ),
         )

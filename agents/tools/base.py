@@ -1,14 +1,16 @@
 from typing import Any, Protocol
 
+from agents.tools.contracts import (
+    ToolDefinition,
+)
+
 
 class AgentTool(Protocol):
 
     @property
-    def name(self) -> str:
-        ...
-
-    @property
-    def description(self) -> str:
+    def definition(
+        self,
+    ) -> ToolDefinition:
         ...
 
     def execute(

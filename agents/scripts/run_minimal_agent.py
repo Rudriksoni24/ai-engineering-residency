@@ -15,6 +15,12 @@ from agents.generation.ollama_generator import (
 from agents.tools.banking import (
     GetAccountTool,
 )
+from agents.tools.executor import (
+    AgentToolExecutor,
+)
+from agents.tools.registry import (
+    AgentToolRegistry,
+)
 
 
 def build_agent(
@@ -36,17 +42,28 @@ def build_agent(
         },
     }
 
+    account_tool = GetAccountTool(
+    accounts=accounts
+)
+
+    registry = AgentToolRegistry(
+        tools=[
+            account_tool
+        ]
+    )
+
+    executor = AgentToolExecutor(
+        registry
+    )
+
     return MinimalAgent(
         generator=(
             OllamaAgentGenerator(
                 model=model
             )
         ),
-        tools=[
-            GetAccountTool(
-                accounts=accounts
-            )
-        ],
+        registry=registry,
+        executor=executor,
         prompt_builder=(
             AgentPromptBuilder()
         ),
