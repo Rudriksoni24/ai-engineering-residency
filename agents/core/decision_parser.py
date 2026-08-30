@@ -31,6 +31,10 @@ class AgentDecisionParser:
         decision_type = payload.get(
             "type"
         )
+        if decision_type not in {"tool", "final"}:
+            raise ValueError(
+                f"unsupported decision type: {decision_type}"
+            )
 
         if decision_type == "final":
 
