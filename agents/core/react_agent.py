@@ -9,6 +9,10 @@ from agents.core.decision_parser import (
 from agents.core.prompt_builder import (
     AgentPromptBuilder,
 )
+from agents.guardrails.decision_guard import (
+    AgentDecisionGuard,
+    AgentGuardrailError,
+)
 from agents.memory.store import AgentMemory
 from agents.tools.executor import (
     AgentToolExecutor,
@@ -41,6 +45,7 @@ class ReActAgent:
         decision_parser: AgentDecisionParser,
         max_iterations: int = 5,
         memory: AgentMemory | None = None,
+        decision_guard: AgentDecisionGuard | None = None,
     ) -> None:
         if max_iterations <= 0:
             raise ValueError(
@@ -52,13 +57,10 @@ class ReActAgent:
         self.registry = registry
         self.executor = executor
         self.prompt_builder = prompt_builder
-        self.decision_parser = (
-            decision_parser
-        )
-        self.max_iterations = (
-            max_iterations
-        )
+        self.decision_parser = decision_parser
+        self.max_iterations = max_iterations
         self.memory = memory
+        self.decision_guard = decision_guard
 
     def run(
         self,
@@ -87,9 +89,7 @@ class ReActAgent:
         ):
             prompt = (
                 self.prompt_builder.build(
-                    user_query=(
-                        normalized_query
-                    ),
+                    user_query=normalized_query,
                     registry=self.registry,
                     steps=steps,
                     memory=memory_messages,
@@ -108,6 +108,10 @@ class ReActAgent:
                 )
             )
 
+            self._validate_decision(
+                decision
+            )
+
             if (
                 decision.decision_type
                 == "final"
@@ -120,9 +124,7 @@ class ReActAgent:
                 )
 
                 self._commit_memory(
-                    user_query=(
-                        normalized_query
-                    ),
+                    user_query=normalized_query,
                     response=response,
                 )
 
@@ -134,18 +136,13 @@ class ReActAgent:
 
             if tool_call is None:
                 raise AgentExecutionError(
-                    "tool decision missing "
-                    "tool call"
+                    "tool decision missing tool call"
                 )
 
             result = (
                 self.executor.execute(
-                    tool_name=(
-                        tool_call.tool_name
-                    ),
-                    arguments=(
-                        tool_call.arguments
-                    ),
+                    tool_name=tool_call.tool_name,
+                    arguments=tool_call.arguments,
                 )
             )
 
@@ -156,22 +153,18 @@ class ReActAgent:
                 )
 
                 raise AgentExecutionError(
-                    f"tool '{tool_call.tool_name}' failed: "
-                    f"{error_message}"
+                    f"tool '{tool_call.tool_name}' "
+                    f"failed: {error_message}"
                 )
 
             steps.append(
                 AgentStep(
                     iteration=iteration,
-                    tool_name=(
-                        result.tool_name
-                    ),
+                    tool_name=result.tool_name,
                     arguments=dict(
                         tool_call.arguments
                     ),
-                    observation=(
-                        result.observation
-                    ),
+                    observation=result.observation,
                 )
             )
 
@@ -180,6 +173,23 @@ class ReActAgent:
             f"iteration limit of "
             f"{self.max_iterations}"
         )
+
+    def _validate_decision(
+        self,
+        decision: AgentDecision,
+    ) -> None:
+        if self.decision_guard is None:
+            return
+
+        try:
+            self.decision_guard.validate(
+                decision=decision,
+                registry=self.registry,
+            )
+        except AgentGuardrailError as exc:
+            raise AgentExecutionError(
+                f"agent decision rejected: {exc}"
+            ) from exc
 
     def _commit_memory(
         self,
@@ -210,8 +220,7 @@ class ReActAgent:
 
         if final_answer is None:
             raise AgentExecutionError(
-                "final decision missing "
-                "answer"
+                "final decision missing answer"
             )
 
         last_step = (

@@ -139,4 +139,16 @@ Do not expose hidden reasoning, chain-of-thought, or private rationale.
 If a tool is needed, return a tool decision.
 
 If enough information is available to answer, return a final decision.
+
+Do not infer facts that require another available tool lookup.
+
+If an observation contains an identifier for another entity needed to answer
+the user's question, call the appropriate tool before producing a final answer.
+
+For example, if a transaction observation contains an account_id and the user
+asks who owns that account, you must call the account lookup tool before
+answering.
+
+A tool observation is evidence only for the fields explicitly present in that
+observation.
 """.strip()
