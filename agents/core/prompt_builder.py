@@ -1,80 +1,142 @@
-from __future__ import annotations
-
 import json
 from collections.abc import Sequence
 
 from agents.contracts.agent import AgentStep
+from agents.memory.contracts import MemoryMessage
 from agents.tools.registry import AgentToolRegistry
 
 
 class AgentPromptBuilder:
     def build(
         self,
+        *,
         user_query: str,
         registry: AgentToolRegistry,
         steps: Sequence[AgentStep] = (),
+        memory: Sequence[MemoryMessage] = (),
     ) -> str:
-        if not user_query.strip():
-            raise ValueError("user_query must not be empty")
+        normalized_query = user_query.strip()
+
+        if not normalized_query:
+            raise ValueError(
+                "user_query cannot be empty"
+            )
 
         tools = [
             {
                 "name": definition.name,
-                "description": definition.description,
+                "description": (
+                    definition.description
+                ),
                 "parameters": [
                     {
                         "name": parameter.name,
-                        "type": parameter.parameter_type,
-                        "description": parameter.description,
-                        "required": parameter.required,
+                        "type": (
+                            parameter.parameter_type
+                        ),
+                        "description": (
+                            parameter.description
+                        ),
+                        "required": (
+                            parameter.required
+                        ),
                     }
-                    for parameter in definition.parameters
+                    for parameter
+                    in definition.parameters
                 ],
             }
-            for definition in registry.definitions()
+            for definition
+            in registry.definitions()
+        ]
+
+        memory_payload = [
+            {
+                "role": message.role,
+                "content": message.content,
+            }
+            for message in memory
         ]
 
         trajectory = [
             {
                 "iteration": step.iteration,
                 "action": {
-                    "tool_name": step.tool_name,
-                    "arguments": step.arguments,
+                    "tool_name": (
+                        step.tool_name
+                    ),
+                    "arguments": (
+                        step.arguments
+                    ),
                 },
-                "observation": step.observation,
+                "observation": (
+                    step.observation
+                ),
             }
             for step in steps
         ]
 
-        return (
-            "You are a tool-using agent.\n"
-            "\n"
-            "Complete the user's goal using the available tools when needed.\n"
-            "You may make exactly one decision per response.\n"
-            "\n"
-            "Return exactly one JSON object and no other text.\n"
-            "\n"
-            "To request a tool:\n"
-            '{\n'
-            '  "type": "tool",\n'
-            '  "tool_name": "<tool name>",\n'
-            '  "arguments": {}\n'
-            '}\n'
-            "\n"
-            "To provide the final answer:\n"
-            '{\n'
-            '  "type": "final",\n'
-            '  "answer": "<answer>"\n'
-            '}\n'
-            "\n"
-            "Do not include hidden reasoning, chain-of-thought, or a rationale.\n"
-            "Use previous observations to decide the next action or final answer.\n"
-            "Do not invent tool observations.\n"
-            "\n"
-            f"Available tools:\n{json.dumps(tools, indent=2, sort_keys=True)}\n"
-            "\n"
-            f"User goal:\n{user_query}\n"
-            "\n"
-            "Previous action/observation trajectory:\n"
-            f"{json.dumps(trajectory, indent=2, sort_keys=True)}\n"
-        )
+        return f"""
+You are a tool-using agent.
+
+You may either:
+
+1. call exactly one available tool
+2. return a final answer
+
+Return exactly one JSON object.
+
+Tool decision format:
+
+{{
+  "type": "tool",
+  "tool_name": "tool_name",
+  "arguments": {{
+    "argument": "value"
+  }}
+}}
+
+Final decision format:
+
+{{
+  "type": "final",
+  "answer": "answer"
+}}
+
+Available tools:
+
+{json.dumps(
+    tools,
+    indent=2,
+)}
+
+Conversation memory from earlier completed turns:
+
+{json.dumps(
+    memory_payload,
+    indent=2,
+)}
+
+Current execution trajectory:
+
+{json.dumps(
+    trajectory,
+    indent=2,
+)}
+
+Current user query:
+
+{normalized_query}
+
+Use conversation memory only when relevant to the current query.
+
+Tool observations in the current execution trajectory are authoritative
+for the current run.
+
+Do not invent tool results.
+
+Do not expose hidden reasoning, chain-of-thought, or private rationale.
+
+If a tool is needed, return a tool decision.
+
+If enough information is available to answer, return a final decision.
+""".strip()

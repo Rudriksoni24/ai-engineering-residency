@@ -1,115 +1,236 @@
-from __future__ import annotations
-
 from agents.contracts.agent import (
     AgentDecision,
-    AgentGenerator,
     AgentResponse,
     AgentStep,
 )
-from agents.core.decision_parser import AgentDecisionParser
-from agents.core.prompt_builder import AgentPromptBuilder
-from agents.tools.executor import AgentToolExecutor
-from agents.tools.registry import AgentToolRegistry
+from agents.core.decision_parser import (
+    AgentDecisionParser,
+)
+from agents.core.prompt_builder import (
+    AgentPromptBuilder,
+)
+from agents.memory.store import AgentMemory
+from agents.tools.executor import (
+    AgentToolExecutor,
+)
+from agents.tools.registry import (
+    AgentToolRegistry,
+)
 
 
-class AgentExecutionError(RuntimeError):
-    """Raised when an iterative agent run cannot continue safely."""
+class AgentExecutionError(
+    RuntimeError
+):
+    pass
 
 
-class AgentIterationLimitError(AgentExecutionError):
-    """Raised when the agent does not terminate within its iteration limit."""
+class AgentIterationLimitError(
+    RuntimeError
+):
+    pass
 
 
 class ReActAgent:
     def __init__(
         self,
-        generator: AgentGenerator,
+        *,
+        generator,
         registry: AgentToolRegistry,
         executor: AgentToolExecutor,
         prompt_builder: AgentPromptBuilder,
         decision_parser: AgentDecisionParser,
         max_iterations: int = 5,
+        memory: AgentMemory | None = None,
     ) -> None:
         if max_iterations <= 0:
-            raise ValueError("max_iterations must be greater than zero")
+            raise ValueError(
+                "max_iterations must be "
+                "greater than zero"
+            )
 
-        self._generator = generator
-        self._registry = registry
-        self._executor = executor
-        self._prompt_builder = prompt_builder
-        self._decision_parser = decision_parser
-        self._max_iterations = max_iterations
+        self.generator = generator
+        self.registry = registry
+        self.executor = executor
+        self.prompt_builder = prompt_builder
+        self.decision_parser = (
+            decision_parser
+        )
+        self.max_iterations = (
+            max_iterations
+        )
+        self.memory = memory
 
-    def run(self, user_query: str) -> AgentResponse:
-        if not user_query.strip():
-            raise ValueError("user_query must not be empty")
+    def run(
+        self,
+        user_query: str,
+    ) -> AgentResponse:
+        normalized_query = (
+            user_query.strip()
+        )
+
+        if not normalized_query:
+            raise ValueError(
+                "user_query cannot be empty"
+            )
 
         steps: list[AgentStep] = []
 
-        for iteration in range(1, self._max_iterations + 1):
-            prompt = self._prompt_builder.build(
-                user_query=user_query,
-                registry=self._registry,
-                steps=steps,
+        memory_messages = (
+            self.memory.messages()
+            if self.memory is not None
+            else ()
+        )
+
+        for iteration in range(
+            1,
+            self.max_iterations + 1,
+        ):
+            prompt = (
+                self.prompt_builder.build(
+                    user_query=(
+                        normalized_query
+                    ),
+                    registry=self.registry,
+                    steps=steps,
+                    memory=memory_messages,
+                )
             )
 
-            raw_output = self._generator.generate(prompt)
-            decision = self._decision_parser.parse(raw_output)
+            raw_decision = (
+                self.generator.generate(
+                    prompt
+                )
+            )
 
-            if decision.decision_type == "final":
-                return self._build_final_response(
-                    decision=decision,
-                    steps=steps,
+            decision = (
+                self.decision_parser.parse(
+                    raw_decision
+                )
+            )
+
+            if (
+                decision.decision_type
+                == "final"
+            ):
+                response = (
+                    self._build_final_response(
+                        decision=decision,
+                        steps=steps,
+                    )
                 )
 
-            if decision.decision_type != "tool":
-                raise AgentExecutionError(
-                    f"Unsupported agent decision: {decision.decision_type}"
+                self._commit_memory(
+                    user_query=(
+                        normalized_query
+                    ),
+                    response=response,
                 )
 
-            tool_call = decision.tool_call
+                return response
+
+            tool_call = (
+                decision.tool_call
+            )
 
             if tool_call is None:
                 raise AgentExecutionError(
-                    "Tool decision did not contain a tool call"
+                    "tool decision missing "
+                    "tool call"
                 )
 
-            result = self._executor.execute(
-                tool_name=tool_call.tool_name,
-                arguments=tool_call.arguments,
+            result = (
+                self.executor.execute(
+                    tool_name=(
+                        tool_call.tool_name
+                    ),
+                    arguments=(
+                        tool_call.arguments
+                    ),
+                )
             )
 
             if not result.success:
-                message = result.error or "Unknown tool execution error"
+                error_message = (
+                    result.error
+                    or "tool execution failed"
+                )
+
                 raise AgentExecutionError(
-                    f"Tool '{tool_call.tool_name}' failed: {message}"
+                    f"tool '{tool_call.tool_name}' failed: "
+                    f"{error_message}"
                 )
 
             steps.append(
                 AgentStep(
                     iteration=iteration,
-                    tool_name=tool_call.tool_name,
-                    arguments=dict(tool_call.arguments),
-                    observation=result.observation,
+                    tool_name=(
+                        result.tool_name
+                    ),
+                    arguments=dict(
+                        tool_call.arguments
+                    ),
+                    observation=(
+                        result.observation
+                    ),
                 )
             )
 
         raise AgentIterationLimitError(
-            "Agent reached the maximum iteration limit "
-            f"of {self._max_iterations} without producing a final answer"
+            "agent exceeded maximum "
+            f"iteration limit of "
+            f"{self.max_iterations}"
+        )
+
+    def _commit_memory(
+        self,
+        *,
+        user_query: str,
+        response: AgentResponse,
+    ) -> None:
+        if self.memory is None:
+            return
+
+        self.memory.remember_user(
+            user_query
+        )
+
+        self.memory.remember_assistant(
+            response.answer
         )
 
     @staticmethod
     def _build_final_response(
+        *,
         decision: AgentDecision,
         steps: list[AgentStep],
     ) -> AgentResponse:
-        if decision.final_answer is None:
+        final_answer = (
+            decision.final_answer
+        )
+
+        if final_answer is None:
             raise AgentExecutionError(
-                "Final decision did not contain an answer"
+                "final decision missing "
+                "answer"
             )
 
+        last_step = (
+            steps[-1]
+            if steps
+            else None
+        )
+
         return AgentResponse(
-            answer=decision.final_answer,
+            answer=final_answer,
+            tool_used=(
+                last_step.tool_name
+                if last_step
+                else None
+            ),
+            observation=(
+                last_step.observation
+                if last_step
+                else None
+            ),
             steps=tuple(steps),
         )
