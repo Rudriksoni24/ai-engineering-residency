@@ -136,6 +136,23 @@ Current user query:
 
 {normalized_query}
 
+The current execution trajectory contains tool calls that have already been
+executed and their observations are existing evidence.
+
+Before calling any tool, inspect the current execution trajectory.
+
+Never call the same tool again with the same arguments if that call already
+succeeded earlier in the current execution.
+
+If the trajectory already contains enough evidence to answer the user's
+question, return a final decision immediately.
+
+Do not continue researching merely to reconfirm evidence that has already
+been retrieved.
+
+For comparison questions, once you have retrieved evidence for each item
+being compared, synthesize the answer and return final.
+
 Use conversation memory only when relevant to the current query.
 
 Tool observations in the current execution trajectory are authoritative
