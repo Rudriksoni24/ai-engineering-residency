@@ -18,7 +18,7 @@
 | Sprint 2 | Run and Engineer Local LLM Systems | 🟢 |
 | Sprint 3 | Build Production-Style RAG | 🟢 |
 | Sprint 4 | Build GraphRAG | 🟢 |
-| Sprint 5 | Build Agent Fundamentals | 🟡 |
+| Sprint 5 | Build Agent Fundamentals | 🟢 |
 | Sprint 6 | Build Stateful and Multi-Agent Workflows | ⚪ |
 | Sprint 7 | Adapt Local Models with LoRA and Understand Alignment | ⚪ |
 | Sprint 8 | Build Traditional ML and MLflow Systems | ⚪ |
@@ -157,7 +157,7 @@
 | Day 4 | Memory Fundamentals | 🟢 | Agent Memory Layer |
 | Day 5 | Structured Outputs and Guardrails | 🟢 | Reliable Agent Contracts |
 | Day 6 | Agent Evaluation | 🟢 | Agent Test Harness |
-| Day 7 | Sprint Integration | ⚪ | Research and Analysis Agent |
+| Day 7 | Sprint Integration | 🟢 | Research and Analysis Agent |
 
 ## Sprint Exit Criteria
 
