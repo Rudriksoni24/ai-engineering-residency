@@ -19,7 +19,7 @@
 | Sprint 3 | Build Production-Style RAG | 🟢 |
 | Sprint 4 | Build GraphRAG | 🟢 |
 | Sprint 5 | Build Agent Fundamentals | 🟢 |
-| Sprint 6 | Build Stateful and Multi-Agent Workflows | ⚪ |
+| Sprint 6 | Build Stateful and Multi-Agent Workflows | 🟡 |
 | Sprint 7 | Adapt Local Models with LoRA and Understand Alignment | ⚪ |
 | Sprint 8 | Build Traditional ML and MLflow Systems | ⚪ |
 | Sprint 9 | Build Streaming Data Pipelines | ⚪ |
@@ -178,7 +178,7 @@
 
 | Day | Topic | Status | Artifact |
 |---|---|---|---|
-| Day 1 | Stateful Agent Workflows | ⚪ | Workflow State Machine |
+| Day 1 | Stateful Agent Workflows | 🟢 | Workflow State Machine |
 | Day 2 | Workflow Graphs | ⚪ | Graph-Based Agent Workflow |
 | Day 3 | Persistence and Checkpointing | ⚪ | Persistent Agent State |
 | Day 4 | Multi-Agent Coordination | ⚪ | Coordinator and Worker Agents |
