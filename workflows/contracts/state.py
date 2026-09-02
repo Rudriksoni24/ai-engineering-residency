@@ -25,6 +25,7 @@ class WorkflowState:
     workflow_id: str
     status: WorkflowStatus
     input: dict[str, Any]
+    context: dict[str, Any] = field(default_factory=dict)
     result: Any | None = None
     error: str | None = None
     history: list[WorkflowTransition] = field(default_factory=list)
