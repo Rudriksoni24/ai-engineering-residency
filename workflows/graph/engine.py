@@ -220,8 +220,14 @@ class WorkflowGraphEngine:
     def run(
         self,
         state: WorkflowState,
+        *,
+        start_node: str | None = None,
     ) -> WorkflowState:
-        current_node = self._graph.start_node
+        current_node = (
+            start_node
+            if start_node is not None
+            else self._graph.start_node
+        )
 
         if current_node is None:
             raise WorkflowGraphError(
