@@ -19,7 +19,7 @@
 | Sprint 3 | Build Production-Style RAG | 🟢 |
 | Sprint 4 | Build GraphRAG | 🟢 |
 | Sprint 5 | Build Agent Fundamentals | 🟢 |
-| Sprint 6 | Build Stateful and Multi-Agent Workflows | 🟡 |
+| Sprint 6 | Build Stateful and Multi-Agent Workflows | 🟢 |
 | Sprint 7 | Adapt Local Models with LoRA and Understand Alignment | ⚪ |
 | Sprint 8 | Build Traditional ML and MLflow Systems | ⚪ |
 | Sprint 9 | Build Streaming Data Pipelines | ⚪ |
@@ -184,7 +184,7 @@
 | Day 4 | Multi-Agent Coordination | 🟢 | Coordinator and Worker Agents |
 | Day 5 | Human-in-the-Loop | 🟢 | Approval Workflow |
 | Day 6 | Failure Recovery and Retry | 🟢 | Resilient Workflow Engine |
-| Day 7 | Sprint Integration | ⚪ | Multi-Agent Operations System |
+| Day 7 | Sprint Integration | 🟢 | Multi-Agent Operations System |
 
 ## Sprint Exit Criteria
 
