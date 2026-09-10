@@ -241,3 +241,8 @@ __marimo__/
 *.db
 *.db-shm
 *.db-wal
+
+# Generated model-training artifacts
+artifacts/
+checkpoints/
+*.safetensors
