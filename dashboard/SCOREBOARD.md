@@ -205,7 +205,7 @@
 | Day | Topic | Status | Artifact |
 |---|---|---|---|
 | Day 1 | Fine-Tuning Fundamentals | 🟢 | Fine-Tuning Study Lab |
-| Day 2 | LoRA Mathematics and Architecture | ⚪ | LoRA Implementation |
+| Day 2 | LoRA Mathematics and Architecture | 🟢 | LoRA Implementation |
 | Day 3 | PEFT and Local Fine-Tuning | ⚪ | Adapted Local Model |
 | Day 4 | Dataset Preparation for Fine-Tuning | ⚪ | Training Dataset Pipeline |
 | Day 5 | RLHF Concepts | ⚪ | Alignment Architecture Notes |
