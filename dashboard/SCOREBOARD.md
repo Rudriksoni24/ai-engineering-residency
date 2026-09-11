@@ -209,7 +209,7 @@
 | Day 3 | PEFT and Local Fine-Tuning | 🟢 | Adapted Local Model |
 | Day 4 | Dataset Preparation for Fine-Tuning | 🟢 | Training Dataset Pipeline |
 | Day 5 | RLHF Concepts | 🟢 | Alignment Architecture Notes |
-| Day 6 | Direct Preference Optimization | ⚪ | Preference Optimization Lab |
+| Day 6 | Direct Preference Optimization | 🟢 | Preference Optimization Lab |
 | Day 7 | Sprint Integration | ⚪ | Domain-Adapted Local Model |
 
 ## Sprint Exit Criteria
