@@ -360,6 +360,42 @@ def format_instruction_example(
         sections
     )
 
+def format_instruction_prompt(
+    example: InstructionExample,
+    *,
+    system_prompt: str,
+) -> str:
+    sections = [
+        "### System",
+        normalize_text(
+            system_prompt
+        ),
+        "",
+        "### Instruction",
+        example.instruction,
+    ]
+
+    if example.input_text:
+        sections.extend(
+            [
+                "",
+                "### Input",
+                example.input_text,
+            ]
+        )
+
+    sections.extend(
+        [
+            "",
+            "### Response",
+            "",
+        ]
+    )
+
+    return "\n".join(
+        sections
+    )
+
 
 def format_chat_messages(
     example: InstructionExample,
