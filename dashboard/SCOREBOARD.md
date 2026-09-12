@@ -21,7 +21,7 @@
 | Sprint 5 | Build Agent Fundamentals | 🟢 |
 | Sprint 6 | Build Stateful and Multi-Agent Workflows | 🟢 |
 | Sprint 7 | Adapt Local Models with LoRA and Understand Alignment | 🟢 |
-| Sprint 8 | Build Traditional ML and MLflow Systems | ⚪ |
+| Sprint 8 | Build Traditional ML and MLflow Systems | 🟡 |
 | Sprint 9 | Build Streaming Data Pipelines | ⚪ |
 | Sprint 10 | Deploy with Kubernetes and CI/CD | ⚪ |
 | Sprint 11 | Build Banking Portfolio Systems | ⚪ |
@@ -231,7 +231,7 @@
 
 | Day | Topic | Status | Artifact |
 |---|---|---|---|
-| Day 1 | Classical ML Pipeline | ⚪ | ML Pipeline |
+| Day 1 | Classical ML Pipeline | 🟢 | ML Pipeline |
 | Day 2 | Feature Engineering | ⚪ | Feature Engineering Lab |
 | Day 3 | Fraud Detection Modeling | ⚪ | Fraud Detection Model |
 | Day 4 | Experiment Tracking with MLflow | ⚪ | MLflow Tracking System |
