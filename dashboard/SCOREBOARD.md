@@ -20,7 +20,7 @@
 | Sprint 4 | Build GraphRAG | 🟢 |
 | Sprint 5 | Build Agent Fundamentals | 🟢 |
 | Sprint 6 | Build Stateful and Multi-Agent Workflows | 🟢 |
-| Sprint 7 | Adapt Local Models with LoRA and Understand Alignment | 🟡 |
+| Sprint 7 | Adapt Local Models with LoRA and Understand Alignment | 🟢 |
 | Sprint 8 | Build Traditional ML and MLflow Systems | ⚪ |
 | Sprint 9 | Build Streaming Data Pipelines | ⚪ |
 | Sprint 10 | Deploy with Kubernetes and CI/CD | ⚪ |
@@ -210,7 +210,7 @@
 | Day 4 | Dataset Preparation for Fine-Tuning | 🟢 | Training Dataset Pipeline |
 | Day 5 | RLHF Concepts | 🟢 | Alignment Architecture Notes |
 | Day 6 | Direct Preference Optimization | 🟢 | Preference Optimization Lab |
-| Day 7 | Sprint Integration | ⚪ | Domain-Adapted Local Model |
+| Day 7 | Sprint Integration | 🟢 | Domain-Adapted Local Model |
 
 ## Sprint Exit Criteria
 
