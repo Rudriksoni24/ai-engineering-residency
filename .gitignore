@@ -246,3 +246,7 @@ __marimo__/
 artifacts/
 checkpoints/
 *.safetensors
+
+# Sprint 8 local MLflow state
+artifacts/mlflow/
+mlruns/
