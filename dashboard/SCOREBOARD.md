@@ -236,7 +236,7 @@
 | Day 3 | Fraud Detection Modeling | 🟢 | Fraud Detection Model |
 | Day 4 | Experiment Tracking with MLflow | 🟢 | MLflow Tracking System |
 | Day 5 | Model Registry | 🟢 | Model Lifecycle Pipeline |
-| Day 6 | Data and Model Validation | ⚪ | Validation Suite |
+| Day 6 | Data and Model Validation | 🟢 | Validation Suite |
 | Day 7 | Sprint Integration | ⚪ | Reproducible ML Platform |
 
 ## Sprint Exit Criteria
