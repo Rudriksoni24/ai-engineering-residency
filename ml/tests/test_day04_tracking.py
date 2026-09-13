@@ -2,7 +2,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import mlflow.sklearn
+
 from ml.data.synthetic import (
+    FEATURE_COLUMNS,
     generate_synthetic_transactions,
 )
 from ml.tracking.fingerprint import (
@@ -362,9 +365,22 @@ def test_model_uri_is_recorded(
 
     tracked = result.runs[0]
 
-    assert tracked.model_uri == (
-        f"runs:/{tracked.run_id}/model"
+    assert tracked.model_uri
+    assert tracked.model_uri.startswith(
+        "models:/"
     )
+
+    loaded_model = mlflow.sklearn.load_model(
+        tracked.model_uri
+    )
+
+    predictions = loaded_model.predict(
+        dataframe[
+            FEATURE_COLUMNS
+        ].iloc[:5]
+    )
+
+    assert predictions.shape == (5,)
 
 
 def test_parent_child_relationship_exists(
