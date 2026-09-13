@@ -24,6 +24,15 @@ from ml.training.tracked_experiments import (
 
 MODEL_NAME = "TestFraudDetectionModel"
 
+def register_tracked_model(
+    registry: ModelRegistryService,
+    tracked,
+):
+    return registry.register_run_model(
+        model_name=MODEL_NAME,
+        run_id=tracked.run_id,
+        model_uri=tracked.model_uri,
+    )
 
 def build_tracking_stack(
     tmp_path: Path,
@@ -117,9 +126,9 @@ def test_registered_model_is_created(
         tmp_path
     )
 
-    info = registry.register_run_model(
-        model_name=MODEL_NAME,
-        run_id=tracked.run_id,
+    info = register_tracked_model(
+        registry,
+        tracked,
     )
 
     registered = (
@@ -144,9 +153,9 @@ def test_registration_preserves_source_run(
         tmp_path
     )
 
-    info = registry.register_run_model(
-        model_name=MODEL_NAME,
-        run_id=tracked.run_id,
+    info = register_tracked_model(
+        registry,
+        tracked,
     )
 
     assert (
@@ -167,14 +176,14 @@ def test_registering_again_creates_new_version(
         tmp_path
     )
 
-    first = registry.register_run_model(
-        model_name=MODEL_NAME,
-        run_id=tracked.run_id,
+    first = register_tracked_model(
+        registry,
+        tracked,
     )
 
-    second = registry.register_run_model(
-        model_name=MODEL_NAME,
-        run_id=tracked.run_id,
+    second = register_tracked_model(
+        registry,
+        tracked,
     )
 
     assert first.version == "1"
@@ -193,14 +202,14 @@ def test_versions_can_be_listed(
         tmp_path
     )
 
-    registry.register_run_model(
-        model_name=MODEL_NAME,
-        run_id=tracked.run_id,
+    first = register_tracked_model(
+        registry,
+        tracked,
     )
 
-    registry.register_run_model(
-        model_name=MODEL_NAME,
-        run_id=tracked.run_id,
+    second = register_tracked_model(
+        registry,
+        tracked,
     )
 
     versions = registry.list_versions(
@@ -228,12 +237,10 @@ def test_candidate_alias_can_be_assigned(
         tmp_path
     )
 
-    registered = (
-        registry.register_run_model(
-            model_name=MODEL_NAME,
-            run_id=tracked.run_id,
-        )
-    )
+    registered = register_tracked_model(
+    registry,
+    tracked,
+)
 
     aliased = registry.assign_alias(
         model_name=MODEL_NAME,
@@ -259,12 +266,10 @@ def test_candidate_alias_resolves_version(
         tmp_path
     )
 
-    registered = (
-        registry.register_run_model(
-            model_name=MODEL_NAME,
-            run_id=tracked.run_id,
-        )
-    )
+    registered = register_tracked_model(
+    registry,
+    tracked,
+)
 
     registry.assign_alias(
         model_name=MODEL_NAME,
@@ -297,15 +302,15 @@ def test_alias_can_move_between_versions(
         tmp_path
     )
 
-    first = registry.register_run_model(
-        model_name=MODEL_NAME,
-        run_id=tracked.run_id,
-    )
-
-    second = registry.register_run_model(
-        model_name=MODEL_NAME,
-        run_id=tracked.run_id,
-    )
+    first = register_tracked_model(
+            registry,
+            tracked,
+        )
+    
+    second = register_tracked_model(
+            registry,
+            tracked,
+        )
 
     registry.assign_alias(
         model_name=MODEL_NAME,
@@ -344,12 +349,10 @@ def test_model_can_load_by_version(
         tmp_path
     )
 
-    registered = (
-        registry.register_run_model(
-            model_name=MODEL_NAME,
-            run_id=tracked.run_id,
-        )
-    )
+    registered = register_tracked_model(
+    registry,
+    tracked,
+)
 
     model = registry.load_by_version(
         model_name=MODEL_NAME,
@@ -381,12 +384,10 @@ def test_model_can_load_by_alias(
         tmp_path
     )
 
-    registered = (
-        registry.register_run_model(
-            model_name=MODEL_NAME,
-            run_id=tracked.run_id,
-        )
-    )
+    registered = register_tracked_model(
+    registry,
+    tracked,
+)
 
     registry.assign_alias(
         model_name=MODEL_NAME,
@@ -420,12 +421,10 @@ def test_lineage_contains_source_metadata(
         tmp_path
     )
 
-    registered = (
-        registry.register_run_model(
-            model_name=MODEL_NAME,
-            run_id=tracked.run_id,
-        )
-    )
+    registered = register_tracked_model(
+    registry,
+    tracked,
+)
 
     lineage = registry.inspect_lineage(
         model_name=MODEL_NAME,
@@ -468,12 +467,10 @@ def test_validation_status_tag_is_stored(
         tmp_path
     )
 
-    registered = (
-        registry.register_run_model(
-            model_name=MODEL_NAME,
-            run_id=tracked.run_id,
-        )
-    )
+    registered = register_tracked_model(
+    registry,
+    tracked,
+)
 
     registry.mark_validation_status(
         model_name=MODEL_NAME,

@@ -68,53 +68,26 @@ class ModelRegistryService:
         *,
         model_name: str,
         run_id: str,
-        artifact_path: str = "model",
+        model_uri: str,
         description: str | None = None,
     ) -> RegisteredModelVersionInfo:
-        """Register a logged run artifact as a new version."""
+        """Register an already logged MLflow model as a new version."""
 
         self.ensure_registered_model(
             model_name=model_name,
-            description=(
-                "Sprint 8 fraud detection model"
-            ),
-        )
-
-        run_model_uri = (
-            f"runs:/{run_id}/{artifact_path}"
-        )
-
-        # MLflow 3.x logs models as first-class "Logged Model" entities
-        # rather than files under the run's artifact directory, so the
-        # legacy `runs:/{run_id}/{artifact_path}` convention above no
-        # longer resolves to a real location in this installed version.
-        # MLflowTracker.log_model_run stashes the real, correct model URI
-        # (returned by mlflow.sklearn.log_model at logging time) as a
-        # "model_uri" tag on the run — prefer that when it's present, and
-        # only fall back to the deprecated runs:/ scheme for older runs
-        # that predate this tag being set.
-        run = self.client.get_run(run_id)
-        tagged_model_uri = run.data.tags.get(
-            "model_uri"
-        )
-
-        source = (
-            tagged_model_uri
-            if tagged_model_uri is not None
-            else run_model_uri
+            description="Sprint 8 fraud detection model",
         )
 
         model_version = (
             self.client.create_model_version(
                 name=model_name,
-                source=source,
+                source=model_uri,
                 run_id=run_id,
                 description=description,
                 tags={
                     "source_run_id": run_id,
-                    "lifecycle_status": (
-                        "registered"
-                    ),
+                    "source_model_uri": model_uri,
+                    "lifecycle_status": "registered",
                 },
             )
         )
