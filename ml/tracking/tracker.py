@@ -154,11 +154,26 @@ class MLflowTracker:
                 "metadata/reproducibility.json",
             )
 
-            mlflow.sklearn.log_model(
+            # MLflow 3.x logs models as first-class "Logged Model" entities
+            # rather than as plain files under the run's own artifact
+            # directory. The old `runs:/{run_id}/model` convention is
+            # deprecated and, in this installed version, no longer resolves
+            # to anything (the run's artifact_uri only ever contains what
+            # log_dict/log_artifact write, never the model). The *correct*
+            # location is whatever `log_model` itself returns as
+            # `model_info.model_uri` — capture it and store it as a run tag
+            # so the registry can look it up later without needing to
+            # change its own call signature.
+            model_info = mlflow.sklearn.log_model(
                 model,
                 name="model",
                 input_example=input_example,
                 serialization_format="cloudpickle",
+            )
+
+            mlflow.set_tag(
+                "model_uri",
+                model_info.model_uri,
             )
 
             return TrackedRun(
@@ -166,7 +181,7 @@ class MLflowTracker:
                 run_name=run_name,
                 model_name=model_name,
                 model_uri=(
-                    f"runs:/{run.info.run_id}/model"
+                    model_info.model_uri
                 ),
                 artifact_uri=(
                     run.info.artifact_uri
@@ -195,3 +210,45 @@ class MLflowTracker:
                 ],
             )
         )
+    def best_run(
+        self,
+        *,
+        metric_name: str = "average_precision",
+    ):
+        experiment = (
+            self.client.get_experiment_by_name(
+                self.config.experiment_name
+            )
+        )
+
+        if experiment is None:
+            raise RuntimeError(
+                "MLflow experiment does not exist"
+            )
+
+        runs = self.client.search_runs(
+            experiment_ids=[
+                experiment.experiment_id
+            ],
+            filter_string=(
+                "attributes.status = 'FINISHED'"
+            ),
+            order_by=[
+                f"metrics.{metric_name} DESC"
+            ],
+        )
+
+        child_runs = [
+            run
+            for run in runs
+            if run.data.params.get(
+                "model_type"
+            )
+        ]
+
+        if not child_runs:
+            raise RuntimeError(
+                "No tracked model runs found"
+            )
+
+        return child_runs[0]
