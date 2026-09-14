@@ -22,7 +22,7 @@
 | Sprint 6 | Build Stateful and Multi-Agent Workflows | 🟢 |
 | Sprint 7 | Adapt Local Models with LoRA and Understand Alignment | 🟢 |
 | Sprint 8 | Build Traditional ML and MLflow Systems | 🟢 |
-| Sprint 9 | Build Streaming Data Pipelines | ⚪ |
+| Sprint 9 | Build Streaming Data Pipelines | 🟡 |
 | Sprint 10 | Deploy with Kubernetes and CI/CD | ⚪ |
 | Sprint 11 | Build Banking Portfolio Systems | ⚪ |
 | Sprint 12 | Harden, Evaluate, and Productionize | ⚪ |
@@ -257,7 +257,7 @@
 
 | Day | Topic | Status | Artifact |
 |---|---|---|---|
-| Day 1 | Kafka Fundamentals | ⚪ | Local Kafka Environment |
+| Day 1 | Kafka Fundamentals | 🟢 | Local Kafka Environment |
 | Day 2 | Kafka Producers and Consumers | ⚪ | Event Pipeline |
 | Day 3 | PySpark Fundamentals | ⚪ | PySpark Data Processing |
 | Day 4 | Spark Structured Streaming | ⚪ | Streaming Processing Pipeline |
