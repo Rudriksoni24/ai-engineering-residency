@@ -7,6 +7,31 @@ __pycache__/
 *.py[codz]
 *$py.class
 data/*.db
+
+# Sprint 9 generated data
+
+# Kafka
+infra/kafka/data/
+*.log
+
+# Spark - future Sprint 9 days
+spark-warehouse/
+.checkpoints/
+checkpoints/
+streaming-output/
+
+# Airflow - future Sprint 9 days
+airflow/logs/
+airflow/*.db
+
+# Delta Lake - future Sprint 9 days
+data/delta/
+artifacts/delta/
+
+# Feast - future Sprint 9 days
+*.db
+feature_store.db
+
 # RAG generated data
 data/processed/*
 !data/processed/.gitkeep
