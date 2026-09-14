@@ -258,7 +258,7 @@
 | Day | Topic | Status | Artifact |
 |---|---|---|---|
 | Day 1 | Kafka Fundamentals | 🟢 | Local Kafka Environment |
-| Day 2 | Kafka Producers and Consumers | ⚪ | Event Pipeline |
+| Day 2 | Kafka Producers and Consumers | 🟢 | Event Pipeline |
 | Day 3 | PySpark Fundamentals | ⚪ | PySpark Data Processing |
 | Day 4 | Spark Structured Streaming | ⚪ | Streaming Processing Pipeline |
 | Day 5 | Airflow Orchestration | ⚪ | Data Workflow DAG |
