@@ -1,0 +1,24 @@
+services:
+  airflow:
+    image: apache/airflow:3.1.0
+
+    container_name: ai-residency-airflow
+
+    environment:
+      - PYTHONPATH=/opt/airflow/project
+      - AIRFLOW_HOME=/opt/airflow
+      - AIRFLOW__CORE__LOAD_EXAMPLES=false
+
+    ports:
+      - "8080:8080"
+
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ../../:/opt/airflow/project
+
+    working_dir: /opt/airflow/project
+
+    command:
+      - standalone
+
+    restart: unless-stopped
