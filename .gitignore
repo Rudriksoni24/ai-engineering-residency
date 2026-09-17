@@ -9,7 +9,6 @@ __pycache__/
 data/*.db
 
 # Sprint 9 generated data
-
 # Kafka
 infra/kafka/data/
 *.log
@@ -23,6 +22,9 @@ streaming-output/
 # Airflow - future Sprint 9 days
 airflow/logs/
 airflow/*.db
+artifacts/sprint09/day05/
+infra/airflow/logs/
+infra/airflow/.airflow/
 
 # Delta Lake - future Sprint 9 days
 data/delta/
