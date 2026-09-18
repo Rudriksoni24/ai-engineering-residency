@@ -262,7 +262,7 @@
 | Day 3 | PySpark Fundamentals | 🟢 | PySpark Data Processing |
 | Day 4 | Spark Structured Streaming | 🟢 | Streaming Processing Pipeline |
 | Day 5 | Airflow Orchestration | 🟢 | Data Workflow DAG |
-| Day 6 | Delta Lake and Data Contracts | ⚪ | Lakehouse Pipeline |
+| Day 6 | Delta Lake and Data Contracts | 🟢 | Lakehouse Pipeline |
 | Day 7 | Feast Feature Store | ⚪ | Feature Serving Pipeline |
 
 ## Sprint Exit Criteria
