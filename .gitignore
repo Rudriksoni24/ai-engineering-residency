@@ -29,6 +29,7 @@ infra/airflow/.airflow/
 # Delta Lake - future Sprint 9 days
 data/delta/
 artifacts/delta/
+artifacts/sprint09/day06/
 
 # Feast - future Sprint 9 days
 *.db
