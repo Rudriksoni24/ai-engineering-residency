@@ -23,7 +23,7 @@
 | Sprint 7 | Adapt Local Models with LoRA and Understand Alignment | 🟢 |
 | Sprint 8 | Build Traditional ML and MLflow Systems | 🟢 |
 | Sprint 9 | Build Streaming Data Pipelines | 🟢 |
-| Sprint 10 | Deploy with Kubernetes and CI/CD | ⚪ |
+| Sprint 10 | Deploy with Kubernetes and CI/CD | 🟡 |
 | Sprint 11 | Build Banking Portfolio Systems | ⚪ |
 | Sprint 12 | Harden, Evaluate, and Productionize | ⚪ |
 
@@ -285,7 +285,7 @@
 
 | Day | Topic | Status | Artifact |
 |---|---|---|---|
-| Day 1 | Kubernetes Fundamentals | ⚪ | Local Kubernetes Cluster |
+| Day 1 | Kubernetes Fundamentals | 🟢 | Local Kubernetes Cluster |
 | Day 2 | Pods, Deployments, Services, Namespaces | ⚪ | Kubernetes Application |
 | Day 3 | Persistent Storage and Databases | ⚪ | Stateful Local Platform |
 | Day 4 | Deploy Airflow and Spark | ⚪ | Kubernetes Data Platform |
