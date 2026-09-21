@@ -8,6 +8,9 @@ __pycache__/
 *$py.class
 data/*.db
 
+#docker
+.dockerignore
+
 # Sprint 9 generated data
 # Kafka
 infra/kafka/data/

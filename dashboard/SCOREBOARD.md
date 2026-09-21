@@ -286,7 +286,7 @@
 | Day | Topic | Status | Artifact |
 |---|---|---|---|
 | Day 1 | Kubernetes Fundamentals | 🟢 | Local Kubernetes Cluster |
-| Day 2 | Pods, Deployments, Services, Namespaces | ⚪ | Kubernetes Application |
+| Day 2 | Pods, Deployments, Services, Namespaces | 🟢 | Kubernetes Application |
 | Day 3 | Persistent Storage and Databases | ⚪ | Stateful Local Platform |
 | Day 4 | Deploy Airflow and Spark | ⚪ | Kubernetes Data Platform |
 | Day 5 | Docker and Artifact Management | ⚪ | Container and Artifact Pipeline |
