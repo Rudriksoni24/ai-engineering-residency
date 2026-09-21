@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: local-llm-api
+  namespace: ai-platform
+
+  labels:
+    app: local-llm-api
+    app.kubernetes.io/name: local-llm-api
+    app.kubernetes.io/part-of: ai-engineering-residency
+
+spec:
+  replicas: 1
+
+  revisionHistoryLimit: 3
+
+  strategy:
+    type: RollingUpdate
+
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+
+  selector:
+    matchLabels:
+      app: local-llm-api
+
+  template:
+    metadata:
+      labels:
+        app: local-llm-api
+        app.kubernetes.io/name: local-llm-api
+
+    spec:
+      terminationGracePeriodSeconds: 30
+
+      containers:
+        - name: api
+
+          image: local-llm-api:0.1.0
+
+          imagePullPolicy: IfNotPresent
+
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+
+          envFrom:
+            - configMapRef:
+                name: local-llm-api-config
+
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+
+            limits:
+              cpu: "1"
+              memory: 512Mi
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+
+            initialDelaySeconds: 3
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 3
+            failureThreshold: 3
+
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 10001
+            allowPrivilegeEscalation: false
+
+            capabilities:
+              drop:
+                - ALL
+
+            seccompProfile:
+              type: RuntimeDefault
