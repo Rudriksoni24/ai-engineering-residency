@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: airflow-spark-artifacts
+  namespace: ai-platform
+  labels:
+    app: airflow-spark
+spec:
+  accessModes:
+    - ReadWriteOnce
+
+  storageClassName: standard
+
+  resources:
+    requests:
+      storage: 1Gi

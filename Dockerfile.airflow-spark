@@ -1,0 +1,33 @@
+FROM apache/airflow:3.1.0
+
+USER root
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+       openjdk-17-jre-headless \
+    && rm -rf /var/lib/apt/lists/*
+
+USER airflow
+
+RUN pip install --no-cache-dir \
+    "apache-airflow==3.1.0" \
+    "pyspark==4.1.1"
+
+ENV PYTHONPATH=/opt/airflow/project \
+    SPARK_LOCAL_HOSTNAME=localhost \
+    SPARK_LOCAL_IP=127.0.0.1 \
+    AIRFLOW__CORE__LOAD_EXAMPLES=False
+
+WORKDIR /opt/airflow/project
+
+COPY --chown=airflow:root \
+    streaming \
+    /opt/airflow/project/streaming
+
+COPY --chown=airflow:root \
+    infra/airflow/dags/transaction_pipeline.py \
+    /opt/airflow/dags/transaction_pipeline.py
+
+EXPOSE 8080
+
+CMD ["standalone"]
