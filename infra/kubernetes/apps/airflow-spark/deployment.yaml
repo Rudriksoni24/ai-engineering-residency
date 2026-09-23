@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airflow-spark
+  namespace: ai-platform
+  labels:
+    app: airflow-spark
+
+spec:
+  replicas: 1
+
+  strategy:
+    type: Recreate
+
+  selector:
+    matchLabels:
+      app: airflow-spark
+
+  template:
+    metadata:
+      labels:
+        app: airflow-spark
+
+    spec:
+      terminationGracePeriodSeconds: 90
+
+      securityContext:
+        fsGroup: 0
+
+      containers:
+        - name: airflow
+          image: airflow-spark-day04:0.1.0
+          imagePullPolicy: IfNotPresent
+
+          ports:
+            - name: web
+              containerPort: 8080
+
+          env:
+            - name: AIRFLOW_HOME
+              value: /opt/airflow
+
+            - name: AIRFLOW__CORE__LOAD_EXAMPLES
+              value: "False"
+
+            - name: PYTHONPATH
+              value: /opt/airflow/project
+
+            - name: SPARK_LOCAL_HOSTNAME
+              value: localhost
+
+            - name: SPARK_LOCAL_IP
+              value: 127.0.0.1
+
+          volumeMounts:
+            - name: artifacts
+              mountPath: /opt/airflow/project/artifacts/sprint09/day05/airflow
+
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+
+            limits:
+              cpu: "2"
+              memory: 3Gi
+
+          startupProbe:
+            tcpSocket:
+              port: web
+            periodSeconds: 10
+            failureThreshold: 60
+
+          readinessProbe:
+            tcpSocket:
+              port: web
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 6
+
+          livenessProbe:
+            tcpSocket:
+              port: web
+            initialDelaySeconds: 120
+            periodSeconds: 30
+            timeoutSeconds: 3
+            failureThreshold: 6
+
+      volumes:
+        - name: artifacts
+          persistentVolumeClaim:
+            claimName: airflow-spark-artifacts
